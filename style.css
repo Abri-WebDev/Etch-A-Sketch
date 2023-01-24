@@ -46,6 +46,7 @@ h2 {
 .control {
     display: flex;
     align-items: center;
+    padding: 10px;
 }
 
 .control h3 {
