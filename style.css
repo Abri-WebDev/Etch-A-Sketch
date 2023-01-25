@@ -51,7 +51,7 @@ h2 {
 
 .control h3 {
     font-size: 20px;
-    color: var(--color-maroon);
+    color: var(--color-maroon);    
 }
 
 .innerControl {
@@ -112,3 +112,16 @@ h2 {
 .box.active {
     background-color: var(--color-maroon);
 }
+
+input[type="range"] {
+    width: 200px;
+    margin: 0;
+  }
+
+datalist {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    writing-mode: vertical-lr;
+    width: 200px;
+  }
