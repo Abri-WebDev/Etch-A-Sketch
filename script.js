@@ -2,9 +2,9 @@ const grid = document.querySelector('.grid');
 const apply = document.querySelector('.apply');
 const reset = document.querySelector('.reset');
 let gridSize = document.querySelector('.gridSize');
-let input = document.querySelector('input');
+let input = document.querySelector('.input');
 let gridSizeInput = 10;
-
+let base = document.getElementById('base');
 
 function createDiv (size) {
     const div = document.createElement('div');
@@ -23,13 +23,14 @@ function createGrid (size) {
     }
 }
 
-apply.addEventListener('click', () => {
+function resetBrowser () {
+
     while(grid.firstChild) {
         grid.removeChild(grid.firstChild);
         }
         createGrid(gridSizeInput);
 
-})
+}
 
 input.addEventListener("input", (e) => {
     gridSizeInput = e.target.value;
@@ -40,12 +41,27 @@ input.addEventListener("input", (e) => {
 
 createGrid(gridSizeInput);
 
-/*
-
-
 grid.addEventListener('mouseover', (e) => {
-   
+   if (e.target.matches('.box')) {
+    e.target.classList.add('active');
+    console.log('e is ', e)
+   }
+})
 
-});
+function handleUpdate() {
+    if (this.name !== "base") {
+        return; 
+    }
+    const suffix = this.dataset.sizing || '';
+    console.log(suffix)
+    document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    resetBrowser();
+}
 
-*/
+function reloadPage(){
+    window.location.reload();
+ }
+
+base.addEventListener('change', handleUpdate);
+apply.addEventListener('click', resetBrowser)
+reset.addEventListener('click', reloadPage)

@@ -1,7 +1,7 @@
 :root {
     --color-orange: #ca5712;
     --color-black: #171719;
-    --color-maroon: #2b0a0a;
+    --base: #ffc600;
 }
 
 *,
@@ -79,18 +79,20 @@ h2 {
     font-size: 20px;
     margin-top: 10px;
     border-radius: 3px;
+    cursor: pointer;
+
 }
 
 .reset {
     display: block;
-    width: 30px;
+    width: 40px;
     height: 30px;
     background-color: transparent;
     border: none;
     margin: 0 auto;
     margin-top: 10px;
     cursor: pointer;
-    margin-right: 74px;
+    margin-left: 79px;
 }
 
 .grid {
@@ -110,7 +112,7 @@ h2 {
 }
 
 .box.active {
-    background-color: var(--color-maroon);
+    background-color: var(--base);
 }
 
 input[type="range"] {

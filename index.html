@@ -15,12 +15,14 @@
         <div class="control">
         <div class="innerControl">
         <h3>Controls</h3>
+        <label for="base">Base Color</label>
+        <input id="base" type="color" name="base" value="#ffc600">
         <div class="gridSize">8x8</div>
-        <input type="range" min="1" max="30" value="15"/>
+        <input class='input' type="range" min="1" max="30" value="15"/>
         <datalist id="values">
-  <option value="15" label="Small"></option>
+  <option value="15" label="Large"></option>
   <option value="20" label="Medium"></option>
-  <option value="25" label="Large"></option>
+  <option value="25" label="Small"></option>
 </datalist>
         <button class="apply">Apply</button>
         <button class="reset">Reset</button>
