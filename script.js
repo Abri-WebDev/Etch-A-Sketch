@@ -5,6 +5,13 @@ let gridSize = document.querySelector('.gridSize');
 let input = document.querySelector('.input');
 let gridSizeInput = 10;
 let base = document.getElementById('base');
+const randomRGB = document.querySelector('.randomRGB');
+
+function handleRandomColor() {
+    let randomColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+    document.documentElement.style.setProperty(`--base`, randomColor);
+    resetSetting();
+}
 
 function createDiv (size) {
     const div = document.createElement('div');
@@ -23,30 +30,13 @@ function createGrid (size) {
     }
 }
 
-function resetBrowser () {
+function resetSetting () {
 
     while(grid.firstChild) {
         grid.removeChild(grid.firstChild);
         }
         createGrid(gridSizeInput);
-
 }
-
-input.addEventListener("input", (e) => {
-    gridSizeInput = e.target.value;
-    gridSize.textContent = `${gridSizeInput}x${gridSizeInput}`
-    console.log('grid size input is', gridSizeInput)
-
-})
-
-createGrid(gridSizeInput);
-
-grid.addEventListener('mouseover', (e) => {
-   if (e.target.matches('.box')) {
-    e.target.classList.add('active');
-    console.log('e is ', e)
-   }
-})
 
 function handleUpdate() {
     if (this.name !== "base") {
@@ -55,13 +45,42 @@ function handleUpdate() {
     const suffix = this.dataset.sizing || '';
     console.log(suffix)
     document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-    resetBrowser();
+    resetSetting();
+
+    if (randomRGB.classList.contains('active')) {
+        randomRGB.classList.remove('active');
+    }
 }
 
 function reloadPage(){
     window.location.reload();
  }
 
+input.addEventListener("input", (e) => {
+    gridSizeInput = e.target.value;
+    gridSize.textContent = `${gridSizeInput}x${gridSizeInput}`
+    console.log('grid size input is', gridSizeInput)
+
+})
+
+grid.addEventListener('mouseover', (e) => {
+    if (e.target.matches('.box')) {
+       if (!randomRGB.classList.contains('active')) {
+        e.target.classList.add('active');
+      } else {
+        e.target.style.backgroundColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+       randomRGB.style.backgroundColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+
+        }
+   }
+})
+
+randomRGB.addEventListener('click', (e) => {
+    randomRGB.classList.toggle('active');
+    handleRandomColor();
+});
+
 base.addEventListener('change', handleUpdate);
-apply.addEventListener('click', resetBrowser)
-reset.addEventListener('click', reloadPage)
+apply.addEventListener('click', resetSetting);
+reset.addEventListener('click', reloadPage);
+createGrid(gridSizeInput);
